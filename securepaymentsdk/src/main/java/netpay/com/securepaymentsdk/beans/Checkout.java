@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by AcheDev on 3/31/17.
  */
 
-public class Checkout implements Serializable{
+public final class Checkout implements Serializable{
 
     public static final String BUNDLE_FLAG = "checkout_bundle_flag";
     private static Checkout iCheackout;

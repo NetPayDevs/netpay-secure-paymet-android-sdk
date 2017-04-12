@@ -36,12 +36,12 @@ public final class NetPay {
         return iNetPay;
     }
 
-    public NetPay userAcq(String userAcq){
+    public NetPay userNetPayMobil(String userAcq){
         this.userAcq = userAcq;
         return iNetPay;
     }
 
-    public NetPay passwordAcq(String passAcq){
+    public NetPay passwordNetPayMolbil(String passAcq){
         this.passAcq = passAcq;
         return iNetPay;
     }
@@ -66,11 +66,11 @@ public final class NetPay {
         return iNetPay;
     }
 
-    public String getUserAcq() {
+    public String getUserNetPayMobil() {
         return userAcq;
     }
 
-    public String getPassAcq() {
+    public String getPasswordNetPayMobil() {
         return passAcq;
     }
 
@@ -93,15 +93,6 @@ public final class NetPay {
     public Context getContext() {
         return context;
     }
-
-    public static NetPay getiNetPay() {
-        return iNetPay;
-    }
-
-    /*public NetPay buildTransaction(Card card, Sale sale){
-            GatewayTransaction.getInstance().buildTransaction(card,sale);
-        return iNetPay;
-    }*/
 
     public NetPay buildTransaction(final Sale sale){
             GatewayTransaction.getInstance().buildTransaction(sale);

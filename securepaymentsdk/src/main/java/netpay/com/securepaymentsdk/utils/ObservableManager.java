@@ -2,11 +2,13 @@ package netpay.com.securepaymentsdk.utils;
 
 import java.util.Observable;
 
+import netpay.com.securepaymentsdk.beans.Sale;
+
 /**
  * Created by AcheDev on 4/3/17.
  */
 
-public class ObservableManager extends Observable {
+public final class ObservableManager extends Observable {
 
     private static ObservableManager iObservableManager ;
 
@@ -40,10 +42,12 @@ public class ObservableManager extends Observable {
         _3DS_STARTED_LOAD,
         _3DS_FINISH_LOAD,
         _3DS_ERROR_LOAD,
-        _3DS_FINISH_TRANSACTION;
+        _3DS_FINISH_TRANSACTION,
+        _3DS_START_TRANSACTION;
 
         private String js;
         private String messageEvent;
+        private Sale saleTrnsaction;
 
 
         public String getJsonTransaction(){
@@ -52,6 +56,14 @@ public class ObservableManager extends Observable {
 
         public void setJsonTransaction(String data){
             js = data;
+        }
+
+        public Sale getSale(){
+            return saleTrnsaction;
+        }
+
+        public void setSaleTransaction(Sale saleTransaction){
+            this.saleTrnsaction = saleTransaction;
         }
 
         public String getMessageEvent() {

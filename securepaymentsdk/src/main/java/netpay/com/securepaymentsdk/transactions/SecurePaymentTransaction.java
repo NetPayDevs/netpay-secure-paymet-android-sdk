@@ -13,10 +13,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import netpay.com.securepaymentsdk.beans.Card;
 import netpay.com.securepaymentsdk.beans.Checkout;
 import netpay.com.securepaymentsdk.beans.Sale;
-import netpay.com.securepaymentsdk.fragments.SecurePaymentDialogFragment;
 import netpay.com.securepaymentsdk.listeners.NetPayListener;
 import netpay.com.securepaymentsdk.utils.ObservableManager;
 import netpay.com.securepaymentsdk.utils.TransactionHelper;
@@ -49,22 +47,18 @@ class SecurePaymentTransaction implements Observer{
         return iSecurePaymentTransaction;
     }
 
-    void buildTransaction(Card card, Sale sale) {
-
-    }
-
     void buildTransaction(final Sale sale) {
         this.sale = sale;
-    }
-
-    void addListener(NetPayListener.OnProcessTransactionListener onProcessTransactionListener) {
-        if(!listListener.contains(onProcessTransactionListener))
-            this.listListener.add(onProcessTransactionListener);
     }
 
     void buildTransaction(final Sale sale, Checkout checkout) {
         this.sale = sale;
         this.checkout = checkout;
+    }
+
+    void addListener(NetPayListener.OnProcessTransactionListener onProcessTransactionListener) {
+        if(!listListener.contains(onProcessTransactionListener))
+            this.listListener.add(onProcessTransactionListener);
     }
 
     void startTransaction(AppCompatActivity activity) {
@@ -104,7 +98,7 @@ class SecurePaymentTransaction implements Observer{
         if (sale != null && sale.getTotalSale() > Sale.VALIDATE_MIN_AMOUNT && sale.getTotalSale() < Sale.VALIDATE_MAX_AMOUNT){
             return true;
         }else {
-            sendErrorTransactionListener("Total Sale is invalid", NetPayListener.OnErrorTransactionListener.TOTAL_SALE);
+            sendErrorTransactionListener("Total Sale is invalid: $" + this.sale.getTotalSale(), NetPayListener.OnErrorTransactionListener.TOTAL_SALE);
             return false;
         }
     }
@@ -113,12 +107,14 @@ class SecurePaymentTransaction implements Observer{
         if (sale != null && !sale.getOrderNumber().isEmpty())
             return true;
         else
-            sendErrorTransactionListener("Order Number is invalid", NetPayListener.OnErrorTransactionListener.ORDER_NUMBER);
+            sendErrorTransactionListener("Order Number is invalid, is null o empty", NetPayListener.OnErrorTransactionListener.ORDER_NUMBER);
             return false;
     }
 
     private void sendErrorTransactionListener(String message, String errorCode) {
+
         this.dismiss3dsDialogFragment();
+
         NetPayListener.OnErrorTransactionListener errorTransactionListener = ( NetPayListener.OnErrorTransactionListener) TransactionHelper.resolveListener(this.listListener, NetPayListener.OnErrorTransactionListener.class);
 
         if (errorTransactionListener != null)
@@ -131,18 +127,29 @@ class SecurePaymentTransaction implements Observer{
 
             switch (((ObservableManager.NetPayEvents) arg)) {
                 case _3DS_STARTED_LOAD:
-                    NetPayListener.OnStartTransactionListener startTransactionListener = ( NetPayListener.OnStartTransactionListener) TransactionHelper.resolveListener(this.listListener, NetPayListener.OnStartTransactionListener.class);
+                    NetPayListener.OnStartLoad3dsListener startLoad3dsListener = ( NetPayListener.OnStartLoad3dsListener) TransactionHelper.resolveListener(this.listListener, NetPayListener.OnStartLoad3dsListener.class);
 
-                    if (startTransactionListener != null)
-                        startTransactionListener.onStartTransaction();
+                    if (startLoad3dsListener != null)
+                        startLoad3dsListener.onStartLoad3ds();
                     break;
 
                 case _3DS_FINISH_LOAD:
+                    NetPayListener.OnFinishLoad3dsListener finishLoad3dsListener  = ( NetPayListener.OnFinishLoad3dsListener) TransactionHelper.resolveListener(this.listListener, NetPayListener.OnFinishLoad3dsListener.class);
+
+                    if (finishLoad3dsListener != null)
+                        finishLoad3dsListener.onFinishLoad3ds();
                     break;
 
                 case _3DS_ERROR_LOAD:
                     this.dismiss3dsDialogFragment();
                     this.sendErrorTransactionListener("Internet Error", NetPayListener.OnErrorTransactionListener.INTERNET_ERROR);
+                    break;
+
+                case _3DS_START_TRANSACTION:
+                    NetPayListener.OnStartTransactionListener startTransactionListener = ( NetPayListener.OnStartTransactionListener) TransactionHelper.resolveListener(this.listListener, NetPayListener.OnStartTransactionListener.class);
+
+                    if (startTransactionListener != null)
+                        startTransactionListener.onStartTransaction(((ObservableManager.NetPayEvents) arg).getSale());
                     break;
 
                 case _3DS_FINISH_TRANSACTION:

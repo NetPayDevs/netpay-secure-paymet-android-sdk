@@ -1,25 +1,29 @@
 package netpay.com.securepaymentsdk.web.clients;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import netpay.com.securepaymentsdk.utils.Log;
 import netpay.com.securepaymentsdk.utils.ObservableManager;
 
 /**
  * Created by AcheDev on 3/30/17.
  */
 
-public class NetPayWebClient extends WebViewClient{
+public final class NetPayWebClient extends WebViewClient{
 
     private static final String LOG_CAT = "NetPayWebClient";
     private boolean isReceiverError;
 
+
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         Log.e(LOG_CAT, "onPageStarted(): " + url);
+        if (url.startsWith("https://cert.netpay.com.mx/SecurePayment/NetPayPayment.jsp"))
+            ObservableManager.getInstance().notifyObservers(ObservableManager.NetPayEvents._3DS_STARTED_LOAD);
         super.onPageStarted(view, url, favicon);
     }
 
@@ -40,11 +44,14 @@ public class NetPayWebClient extends WebViewClient{
             view.setVisibility(View.GONE);
         }else{
             view.setVisibility(View.VISIBLE);
-            ObservableManager.getInstance().notifyObservers(ObservableManager.NetPayEvents._3DS_FINISH_LOAD);
+            if(url.startsWith("https://cert.netpay.com.mx/SecurePayment/NetPayPayment.jsp"))
+                ObservableManager.getInstance().notifyObservers(ObservableManager.NetPayEvents._3DS_FINISH_LOAD);
         }
+
         super.onPageFinished(view, url);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         Log.e(LOG_CAT, "onReceivedError(): error code: " + errorCode + "description: " + description + "failingUrl: " + failingUrl);
