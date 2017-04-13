@@ -36,13 +36,13 @@ public final class NetPay {
         return iNetPay;
     }
 
-    public NetPay userNetPayMobil(String userAcq){
-        this.userAcq = userAcq;
+    public NetPay userNetPayMovil(String userNPMovil){
+        this.userAcq = userNPMovil;
         return iNetPay;
     }
 
-    public NetPay passwordNetPayMobil(String passAcq){
-        this.passAcq = passAcq;
+    public NetPay passwordNetPayMovil(String passNPMovil){
+        this.passAcq = passNPMovil;
         return iNetPay;
     }
 
@@ -66,11 +66,11 @@ public final class NetPay {
         return iNetPay;
     }
 
-    public String getUserNetPayMobil() {
+    public String getUserNetPayMovil() {
         return userAcq;
     }
 
-    public String getPasswordNetPayMobil() {
+    public String getPasswordNetPayMovil() {
         return passAcq;
     }
 
