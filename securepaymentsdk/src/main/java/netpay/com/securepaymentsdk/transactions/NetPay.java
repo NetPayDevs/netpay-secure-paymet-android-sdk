@@ -41,7 +41,7 @@ public final class NetPay {
         return iNetPay;
     }
 
-    public NetPay passwordNetPayMolbil(String passAcq){
+    public NetPay passwordNetPayMobil(String passAcq){
         this.passAcq = passAcq;
         return iNetPay;
     }

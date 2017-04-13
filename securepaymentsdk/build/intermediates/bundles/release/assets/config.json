@@ -1,0 +1,11 @@
+{
+	"version":"1",
+	"config":{
+		"sandbox":{
+			"url_sandbox":"https://cert.netpay.com.mx/SecurePayment/quickpay.jsp"
+		},
+		"production":{
+			"url_prod":"https://cert.netpay.com.mx/SecurePayment/quickpay.jsp"
+		}
+	}
+}

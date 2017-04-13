@@ -20,7 +20,7 @@ public class SubApplication extends Application {
         NetPay.init(this)
                 .configId(CONFIG_ID)
                 .userNetPayMobil(USER_ACQ)
-                .passwordNetPayMolbil(PASS_ACQ)
+                .passwordNetPayMobil(PASS_ACQ)
                 .currency(CURRENCY)
                 .urlSecurePayment(URL_SECURE_PAYMENT);
     }

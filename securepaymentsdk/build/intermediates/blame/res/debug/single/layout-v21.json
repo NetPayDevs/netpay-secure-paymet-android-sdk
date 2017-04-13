@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.0/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.0/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.0/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/AcheDev/Documents/NetPay/Android/SecurePayment/securepaymentsdk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.0/res/layout-v21/notification_template_custom_big.xml"
+    }
+]
